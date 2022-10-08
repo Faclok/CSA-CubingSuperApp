@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 73004b108b43c094ba719b4bb3899617
+timeCreated: 1651916245
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - CubePiecePref: {instanceID: 0}
+  - CubePiecePrefTiled: {instanceID: 0}
+  - CubePiecePrefColorful: {instanceID: 0}
+  - CubeTransf: {instanceID: 0}
+  - solvedText: {instanceID: 0}
+  - SettingsImg: {instanceID: 0}
+  - isType1: {instanceID: 0}
+  - isType2: {instanceID: 0}
+  - isType3: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
