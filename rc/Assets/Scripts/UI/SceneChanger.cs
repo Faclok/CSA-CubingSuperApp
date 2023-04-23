@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class SceneChanger : MonoBehaviour
 {
     public static GameObject gameScene;
-	[SerializeField] private GameObject _gameScene;
+	[SerializeField] private GameObject _gameScene; 
+    public static GameObject ParticlePlace;
+	[SerializeField] private GameObject particlePlace;
     public static GameObject infoScene;
 	[SerializeField] private GameObject _infoScene;
     public static GameObject menuScene;
@@ -23,6 +22,7 @@ public class SceneChanger : MonoBehaviour
 
     private void Awake()
     {
+        
         infoScene = _infoScene;
         menuScene = _menuScene;
         gameScene = _gameScene;

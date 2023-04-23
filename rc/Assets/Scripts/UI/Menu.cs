@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour {
 
@@ -21,7 +19,8 @@ public class Menu : MonoBehaviour {
 
     private void Awake()
     {
-        if (PlayerPrefs.HasKey("ActiveToggle"))
+		
+		if (PlayerPrefs.HasKey("ActiveToggle"))
         {
             cubeTypesScript.activeToggle = PlayerPrefs.GetInt("ActiveToggle");
         }
@@ -52,7 +51,7 @@ public class Menu : MonoBehaviour {
 
     }
     public void Play(){
-		Destroy(gameObject);
+		//Destroy(gameObject);
 		SceneChanger.Cube.gameObject.SetActive(true);
 		SceneChanger.MoveToAnotherScene(SceneChanger.gameScene);
 	}
@@ -76,7 +75,7 @@ public class Menu : MonoBehaviour {
 	
 	public void SettingsSceneMove()
     {
-		if (CubeManager.canShuffle)
+		if (CubeManager.canShuffle && CubeManager.canRotate)
 		{
 			SceneChanger.Cube.gameObject.SetActive(false);
 			SceneChanger.MoveToAnotherScene(SceneChanger.settingsScene);
@@ -106,14 +105,16 @@ public class Menu : MonoBehaviour {
 
 	public void BackFromLesson()
 	{
-		SceneChanger.MoveToAnotherScene(SceneChanger.lessonsMenuScene);
-		SceneChanger.Cube.gameObject.SetActive(false);
-		Destroy(gameObject);
+		for (int i = 0; i < Tab.TabPlace.transform.childCount; i++)
+		{
+			Destroy(Tab.TabPlace.transform.GetChild(i).gameObject);
+		}
+		Instantiate(Tab.Panels[0], Tab.TabPlace);
 	}
 
 	public void BackFromGame()
 	{
-		if (CubeManager.canShuffle)
+		if (CubeManager.canShuffle && CubeManager.canRotate)
 		{
 			SceneChanger.MoveToAnotherScene(SceneChanger.menuScene);
 			SceneChanger.Cube.gameObject.SetActive(false);

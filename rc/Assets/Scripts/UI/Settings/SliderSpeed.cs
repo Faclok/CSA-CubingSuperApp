@@ -20,7 +20,7 @@ public class SliderSpeed : MonoBehaviour
     {
         if(cubeSpeedSlider.value == 1)
         {
-            CubeManager.cubeSpeed = 1;
+            CubeManager.cubeSpeed = 5;
         }
         else if (cubeSpeedSlider.value == 2)
         {

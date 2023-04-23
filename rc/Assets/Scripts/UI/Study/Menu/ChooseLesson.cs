@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +8,11 @@ public class ChooseLesson : MonoBehaviour
 
     public void MoveToLessonScene()
     {
-        Instantiate(lessons[lessonIndex], SceneChanger.scenePlace, false);
-        Destroy(SceneChanger.activeScene);
+        for (int i = 0; i < Tab.TabPlace.transform.childCount; i++)
+        {
+            Destroy(Tab.TabPlace.transform.GetChild(i).gameObject);
+        }
+        Instantiate(lessons[lessonIndex], Tab.TabPlace, false);
+        //Destroy(SceneChanger.activeScene);
     }
 }

@@ -15,8 +15,8 @@ public class CubeManager : MonoBehaviour {
 	     		canShuffle = true;
 	private static Coroutine moveCube;
 	static public CubeManager instance;
-	public static GameObject SolvedParticle;
-	public  GameObject _SolvedParticle;
+	public static ParticleSystem SolvedParticle;
+	public ParticleSystem _SolvedParticle;
 
 	public static int cubeSpeed;
 
@@ -74,8 +74,10 @@ public class CubeManager : MonoBehaviour {
 	};
     private void Awake()
     {
-		SolvedParticle = _SolvedParticle;
-	   instance = this;
+
+	   SolvedParticle = _SolvedParticle;
+		SolvedParticle.playOnAwake = false;
+		instance = this;
 	}
 
     void Start () {
@@ -83,7 +85,10 @@ public class CubeManager : MonoBehaviour {
 		CubeTransf = transform;
 		Type();
 	}
-
+	public static void Type()
+	{
+		CreateCube(cubeTypesScript.activeToggle);
+    }
 	static void CreateCube(int type){
 		if (moveCube != null) {
 			instance.StopCoroutine (moveCube);
@@ -103,14 +108,7 @@ public class CubeManager : MonoBehaviour {
 		CubeCenterPiece = AllCubePieces [13];
 		canRotate = true;
 	}
-	public static void Type()
-	{
-		CreateCube(cubeTypesScript.activeToggle);
-    }
-	public void OnSubmit()
-    {
-		Type();
-	}
+	
 
 	public static IEnumerator Shuffle()
 	{
@@ -127,7 +125,7 @@ public class CubeManager : MonoBehaviour {
 			case 4: edgePieces = FrontPieces; break;
 			case 5: edgePieces = BackPieces; break;
 			}
-			instance.StartCoroutine(Rotate(edgePieces, RotationVectors[edge], 90));
+			instance.StartCoroutine(Rotate(edgePieces, RotationVectors[edge], 45));
 			yield return new WaitForSeconds(.1f);
 		
 		}
@@ -139,7 +137,7 @@ public class CubeManager : MonoBehaviour {
 
 		if (canShuffle) {
 			Type();
-			moveCube = instance.StartCoroutine (Shuffle ());
+			moveCube = instance.StartCoroutine(Shuffle ());
 		}
 	}
 
@@ -152,7 +150,10 @@ public class CubeManager : MonoBehaviour {
 			angle += speed;
 			yield return null;
 		}
-		if(CheckComplete() & Menu.canParticle) { var go = Instantiate(SolvedParticle, SceneChanger.scenePlace); Destroy(go, 2.5f); Menu.canParticle = false; }
+		if(CheckComplete()& Menu.canParticle) { 
+			SolvedParticle.Play();
+			Menu.canParticle = false; 
+		}
 		canRotate = true;
 	}
 

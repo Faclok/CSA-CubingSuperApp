@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class CameraMovement : MonoBehaviour {
     Vector3 localRotation;
@@ -46,54 +42,21 @@ public class CameraMovement : MonoBehaviour {
 
                     if (Input.GetTouch(0).phase == TouchPhase.Moved)
                     {
-                        if (localRotation.y > 90 || localRotation.y < -90)
+                        if (Mathf.Round(localRotation.y/180)%2 != 0)
                         {
-                            localRotation.x += Input.GetTouch(0).deltaPosition.x * -9 *cameraSpeed * Time.deltaTime; ;
+                            localRotation.x += Input.GetTouch(0).deltaPosition.x * -9 * cameraSpeed * Time.deltaTime; ;
                         }
-                        else if (localRotation.y < 90 || localRotation.y > -90)
+                        else if (Mathf.Round(localRotation.y / 180) % 2 == 0)
                         {
                             localRotation.x += Input.GetTouch(0).deltaPosition.x * 9 * cameraSpeed * Time.deltaTime; ;
                         }
-                        else if (localRotation.y < 90 && localRotation.y > -90)
-                        {
-                            localRotation.x += Input.GetTouch(0).deltaPosition.x *  -9 * cameraSpeed * Time.deltaTime; ;
-                        }
-                        localRotation.y += Input.GetTouch(0).deltaPosition.y *  -9 * cameraSpeed * Time.deltaTime;
-                        localRotation.y = Mathf.Clamp(localRotation.y, -180, 90);
+                        localRotation.y += Input.GetTouch(0).deltaPosition.y * -9 * cameraSpeed * Time.deltaTime;
+                        localRotation.y = Mathf.Clamp(localRotation.y, -36000, 36000);
+
 
                     }
                 }
 
-
-                //if (localRotation.y > 90 || localRotation.y < -90)
-                //{
-                //    localRotation.x += Input.GetAxis("Mouse X") * -5;
-                //}
-                //else if (localRotation.y < 90 || localRotation.y > -90)
-                //{
-                //    localRotation.x += Input.GetAxis("Mouse X") * 5;
-                //}
-                //else if (localRotation.y < 90 && localRotation.y > -90)
-                //{
-                //    localRotation.x += Input.GetAxis("Mouse X") * -5;
-                //}
-                //localRotation.y += Input.GetAxis("Mouse Y") * -5;
-                //localRotation.y = Mathf.Clamp(localRotation.y, -180, 90);
-                //if (localRotation.y > 90 || localRotation.y < -90)
-                //{
-                //    localRotation.x += -_Rotationspeed * Input.GetAxis("Mouse X");
-                //}
-                //else if (localRotation.y < 90 || localRotation.y > -90)
-                //{
-                //    localRotation.x += _Rotationspeed * Input.GetAxis("Mouse X");
-                //}
-                //else if (localRotation.y < 90 && localRotation.y > -90)
-                //{
-                //    localRotation.x += -_Rotationspeed * Input.GetAxis("Mouse X");
-                //}
-                //localRotation.y += -_Rotationspeed * Input.GetAxis("Mouse Y");
-                //localRotation.y = Mathf.Clamp(localRotation.y, -270, 180);
-                ////Debug.Log(_Rotationspeed);
             }
 
         } 
