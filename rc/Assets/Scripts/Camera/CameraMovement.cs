@@ -51,7 +51,7 @@ public class CameraMovement : MonoBehaviour {
                             localRotation.x += Input.GetTouch(0).deltaPosition.x * 9 * cameraSpeed * Time.deltaTime; ;
                         }
                         localRotation.y += Input.GetTouch(0).deltaPosition.y * -9 * cameraSpeed * Time.deltaTime;
-                        localRotation.y = Mathf.Clamp(localRotation.y, -36000, 36000);
+                       // localRotation.y = Mathf.Clamp(localRotation.y, -36000, 36000);
 
 
                     }

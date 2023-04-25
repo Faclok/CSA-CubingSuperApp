@@ -150,8 +150,9 @@ public class CubeManager : MonoBehaviour {
 			angle += speed;
 			yield return null;
 		}
-		if(CheckComplete()& Menu.canParticle) { 
+		if(CheckComplete() && Menu.canParticle) { 
 			SolvedParticle.Play();
+
 			Menu.canParticle = false; 
 		}
 		canRotate = true;
@@ -266,12 +267,12 @@ public class CubeManager : MonoBehaviour {
 
 	public static bool CheckComplete()
 	{
-		if (IsSideComplete(UpPieces) &&
-			IsSideComplete(DownPieces) &&
-			IsSideComplete(LeftPieces) &&
-			IsSideComplete(RightPieces) &&
-			IsSideComplete(FrontPieces) &&
-			IsSideComplete(BackPieces))
+		if (IsSideComplete(UpPieces,"U") &&
+			IsSideComplete(DownPieces, "U") &&
+			IsSideComplete(LeftPieces, "L") &&
+			IsSideComplete(RightPieces, "L") &&
+			IsSideComplete(FrontPieces, "B") &&
+			IsSideComplete(BackPieces, "B"))
 		{
 			return true;
 		}
@@ -280,20 +281,28 @@ public class CubeManager : MonoBehaviour {
 			return false; 
 		}
 	}
-	public static bool IsSideComplete(List<GameObject> pieces)
+	public static bool IsSideComplete(List<GameObject> pieces, string side)
 	{
 		int mainPlaneIndex = pieces[4].GetComponent<CubePieceScript>().Planes.FindIndex(x => x.activeInHierarchy);
 
 		for(int i = 0; i < pieces.Count; i++)
 		{
-			if (!pieces[i].GetComponent<CubePieceScript>().Planes[mainPlaneIndex].activeInHierarchy ||
-				pieces[i].GetComponent<CubePieceScript>().Planes[mainPlaneIndex].GetComponent<Renderer>().material.color !=
-				pieces[4].GetComponent<CubePieceScript>().Planes[mainPlaneIndex].GetComponent<Renderer>().material.color)
+			GameObject piece = pieces[i].GetComponent<CubePieceScript>().Planes[mainPlaneIndex];
+			GameObject mainPiece = pieces[4].GetComponent<CubePieceScript>().Planes[mainPlaneIndex];
+			switch (side)
+			{
+				case "U": if (Mathf.Round(piece.transform.position.y) != Mathf.Round(mainPiece.transform.position.y)) { return false; } break;
+				case "L": if (Mathf.Round(piece.transform.position.z) != Mathf.Round(mainPiece.transform.position.z)) { return false; } break;
+				case "B": if (Mathf.Round(piece.transform.position.x) != Mathf.Round(mainPiece.transform.position.x)) { return false; } break;
+				
+			}
+			if (!piece.activeInHierarchy ||
+				piece.GetComponent<Renderer>().material.color !=
+				mainPiece.GetComponent<Renderer>().material.color )
 			{
 				return false;
 			}
-
-		}
+        }
 		return true;
 	}
 }

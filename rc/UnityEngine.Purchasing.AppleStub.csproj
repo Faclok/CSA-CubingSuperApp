@@ -733,13 +733,13 @@
       <Project>{320AA1DA-CEB9-B4F9-2D44-5A987FA75AE0}</Project>
       <Name>UnityEngine.Purchasing.AppleCore</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityEditor.UI.csproj">
-      <Project>{5EC293E2-654B-3096-2FEB-9B5AA0E30DD3}</Project>
-      <Name>UnityEditor.UI</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.csproj">
       <Project>{2269D604-DA3E-2658-4CD9-E9A69EC8210A}</Project>
       <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.UI.csproj">
+      <Project>{5EC293E2-654B-3096-2FEB-9B5AA0E30DD3}</Project>
+      <Name>UnityEditor.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

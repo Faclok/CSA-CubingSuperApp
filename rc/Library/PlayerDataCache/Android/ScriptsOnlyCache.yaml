@@ -1535,4 +1535,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/MainScene/game.unity
-  playerPath: C:/Users/user/Desktop/Rubi1k.apk
+  playerPath: C:/Users/user/Desktop/RubikSimulator.apk
