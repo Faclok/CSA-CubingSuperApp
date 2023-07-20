@@ -15,9 +15,26 @@ public class cubeTypesScript : MonoBehaviour
 
     private void Awake()
     {
+        Tab.Cube.SetActive(false);
         colorType = _colorType;
         tiledType = _tiledType;
         standardType = _standardType;
+    }
+    private void OnDestroy()
+    {
+        Tab.Cube.SetActive(true); 
+    }
+    private void Update()
+    {
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.GetKey(KeyCode.Escape))
+            {
+                Destroy(GameButtons.settings);
+                GameButtons.settings = null;
+                Tab.Cube.gameObject.SetActive(true);
+            }
+        }
     }
     public void GetActiveToggle()
     {
@@ -25,19 +42,19 @@ public class cubeTypesScript : MonoBehaviour
         {
             activeToggle = 0;
             PlayerPrefs.SetInt("ActiveToggle", activeToggle);
-            //CubeManager.Type();
+            CubeCreator.CreateCube();
         }
         if (colorType.isOn)
         {
             activeToggle = 1;
             PlayerPrefs.SetInt("ActiveToggle", activeToggle);
-            //CubeManager.Type();
+            CubeCreator.CreateCube();
         }
         if (tiledType.isOn)
         {
             activeToggle = 2;
             PlayerPrefs.SetInt("ActiveToggle", activeToggle);
-            //CubeManager.Type();
+            CubeCreator.CreateCube();
         }
     }
 }

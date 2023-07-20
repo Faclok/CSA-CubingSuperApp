@@ -1,0 +1,78 @@
+2023-05-03 23:17:02,267 INFO [main] o.w.t.s.w.s.MainLauncher [MainLauncher.kt:44] Detected os: Windows 10
+2023-05-03 23:17:02,271 WARN [main] o.w.t.s.w.s.MainLauncher [MainLauncher.kt:123] C:\Program Files\Java\jre1.8.0_301\temp-launcher is not a directory.
+2023-05-03 23:17:02,271 INFO [main] o.w.t.s.w.s.MainLauncher [MainLauncher.kt:50] needsReExecing: false
+2023-05-03 23:17:02,599 INFO [main] d.s.SystemTray [SystemTray.java:797] Successfully loaded
+2023-05-03 23:17:02,603 WARN [main] d.s.SystemTray [MenuItem.java:465] Please disable tooltips, as they are not consistent across all platforms and tray types.
+2023-05-03 23:17:02,696 INFO [main] Application [ApplicationEngineEnvironmentReloading.kt:146] Autoreload is disabled because the development mode is off.
+2023-05-03 23:17:03,024 INFO [main] Application [BaseApplicationEngine.kt:52] Responding at http://0.0.0.0:2014
+2023-05-03 23:17:03,024 INFO [main] Application [BaseApplicationEngine.kt:59] Application started in 0.338 seconds.
+2023-05-03 23:17:03,314 INFO [main] o.w.t.s.w.WebscramblesServer [WebscramblesServer.kt:126] TNoodle-WCA-1.1.3 started
+2023-05-03 23:17:03,315 INFO [main] o.w.t.s.w.s.OfflineJarUtils [OfflineJarUtils.kt:23] Attempting to open http://localhost:2014 in browser.
+2023-05-03 23:31:59,788 INFO [main] o.w.t.s.w.s.MainLauncher [MainLauncher.kt:44] Detected os: Windows 10
+2023-05-03 23:31:59,791 WARN [main] o.w.t.s.w.s.MainLauncher [MainLauncher.kt:123] C:\Program Files\Java\jre1.8.0_301\temp-launcher is not a directory.
+2023-05-03 23:31:59,791 INFO [main] o.w.t.s.w.s.MainLauncher [MainLauncher.kt:50] needsReExecing: false
+2023-05-03 23:32:00,133 INFO [main] d.s.SystemTray [SystemTray.java:797] Successfully loaded
+2023-05-03 23:32:00,137 WARN [main] d.s.SystemTray [MenuItem.java:465] Please disable tooltips, as they are not consistent across all platforms and tray types.
+2023-05-03 23:32:00,162 WARN [eventLoopGroupProxy-4-5] Application [ShutDownUrl.kt:26] Shutdown URL was called: server is going down
+2023-05-03 23:32:00,168 ERROR [eventLoopGroupProxy-4-5] Application [DefaultEnginePipeline.kt:114] 410 Gone: GET - /kill/tnoodle/now
+java.lang.UnsupportedOperationException: Headers can no longer be set because response was already completed
+	at io.ktor.server.netty.http1.NettyHttp1ApplicationResponse$headers$1.engineAppendHeader(NettyHttp1ApplicationResponse.kt:42)
+	at io.ktor.response.ResponseHeaders.append(ResponseHeaders.kt:47)
+	at io.ktor.response.ResponseHeaders.append$default(ResponseHeaders.kt:41)
+	at io.ktor.response.ApplicationResponsePropertiesKt.header(ApplicationResponseProperties.kt:16)
+	at io.ktor.features.DefaultHeaders.appendDateHeader(DefaultHeaders.kt:59)
+	at io.ktor.features.DefaultHeaders.intercept(DefaultHeaders.kt:48)
+	at io.ktor.features.DefaultHeaders.access$intercept(DefaultHeaders.kt:19)
+	at io.ktor.features.DefaultHeaders$Feature$install$1.invokeSuspend(DefaultHeaders.kt:92)
+	at io.ktor.features.DefaultHeaders$Feature$install$1.invoke(DefaultHeaders.kt)
+	at io.ktor.features.DefaultHeaders$Feature$install$1.invoke(DefaultHeaders.kt)
+	at io.ktor.util.pipeline.SuspendFunctionGun.loop(SuspendFunctionGun.kt:248)
+	at io.ktor.util.pipeline.SuspendFunctionGun.proceed(SuspendFunctionGun.kt:116)
+	at io.ktor.features.StatusPages$interceptCall$2.invokeSuspend(StatusPages.kt:102)
+	at io.ktor.features.StatusPages$interceptCall$2.invoke(StatusPages.kt)
+	at io.ktor.features.StatusPages$interceptCall$2.invoke(StatusPages.kt)
+	at kotlinx.coroutines.intrinsics.UndispatchedKt.startUndispatchedOrReturn(Undispatched.kt:89)
+	at kotlinx.coroutines.CoroutineScopeKt.coroutineScope(CoroutineScope.kt:264)
+	at io.ktor.features.StatusPages.interceptCall(StatusPages.kt:101)
+	at io.ktor.features.StatusPages.access$interceptCall(StatusPages.kt:18)
+	at io.ktor.features.StatusPages$Feature$install$2.invokeSuspend(StatusPages.kt:142)
+	at io.ktor.features.StatusPages$Feature$install$2.invoke(StatusPages.kt)
+	at io.ktor.features.StatusPages$Feature$install$2.invoke(StatusPages.kt)
+	at io.ktor.util.pipeline.SuspendFunctionGun.loop(SuspendFunctionGun.kt:248)
+	at io.ktor.util.pipeline.SuspendFunctionGun.proceed(SuspendFunctionGun.kt:116)
+	at io.ktor.util.pipeline.SuspendFunctionGun.execute(SuspendFunctionGun.kt:136)
+	at io.ktor.util.pipeline.Pipeline.execute(Pipeline.kt:79)
+	at io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$2.invokeSuspend(DefaultEnginePipeline.kt:127)
+	at io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$2.invoke(DefaultEnginePipeline.kt)
+	at io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$2.invoke(DefaultEnginePipeline.kt)
+	at io.ktor.util.pipeline.SuspendFunctionGun.loop(SuspendFunctionGun.kt:248)
+	at io.ktor.util.pipeline.SuspendFunctionGun.proceed(SuspendFunctionGun.kt:116)
+	at io.ktor.util.pipeline.SuspendFunctionGun.execute(SuspendFunctionGun.kt:136)
+	at io.ktor.util.pipeline.Pipeline.execute(Pipeline.kt:79)
+	at io.ktor.server.netty.NettyApplicationCallHandler$handleRequest$1.invokeSuspend(NettyApplicationCallHandler.kt:123)
+	at io.ktor.server.netty.NettyApplicationCallHandler$handleRequest$1.invoke(NettyApplicationCallHandler.kt)
+	at io.ktor.server.netty.NettyApplicationCallHandler$handleRequest$1.invoke(NettyApplicationCallHandler.kt)
+	at kotlinx.coroutines.intrinsics.UndispatchedKt.startCoroutineUndispatched(Undispatched.kt:55)
+	at kotlinx.coroutines.CoroutineStart.invoke(CoroutineStart.kt:112)
+	at kotlinx.coroutines.AbstractCoroutine.start(AbstractCoroutine.kt:126)
+	at kotlinx.coroutines.BuildersKt__Builders_commonKt.launch(Builders.common.kt:56)
+	at kotlinx.coroutines.BuildersKt.launch(Unknown Source)
+	at io.ktor.server.netty.NettyApplicationCallHandler.handleRequest(NettyApplicationCallHandler.kt:43)
+	at io.ktor.server.netty.NettyApplicationCallHandler.channelRead(NettyApplicationCallHandler.kt:34)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:379)
+	at io.netty.channel.AbstractChannelHandlerContext.access$600(AbstractChannelHandlerContext.java:61)
+	at io.netty.channel.AbstractChannelHandlerContext$7.run(AbstractChannelHandlerContext.java:370)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:164)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:472)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:500)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:989)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.ktor.server.netty.EventLoopGroupProxy$Companion.create$lambda-1$lambda-0(NettyApplicationEngine.kt:251)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Unknown Source)
+2023-05-03 23:32:00,213 INFO [main] Application [ApplicationEngineEnvironmentReloading.kt:146] Autoreload is disabled because the development mode is off.
+2023-05-03 23:32:00,483 INFO [main] Application [BaseApplicationEngine.kt:52] Responding at http://0.0.0.0:2014
+2023-05-03 23:32:00,483 INFO [main] Application [BaseApplicationEngine.kt:59] Application started in 0.275 seconds.
+2023-05-03 23:32:00,748 INFO [main] o.w.t.s.w.WebscramblesServer [WebscramblesServer.kt:126] TNoodle-WCA-1.1.3 started
+2023-05-03 23:32:00,748 INFO [main] o.w.t.s.w.s.OfflineJarUtils [OfflineJarUtils.kt:23] Attempting to open http://localhost:2014 in browser.
+2023-05-03 23:32:14,994 INFO [SystemTrayEventDispatch-1] o.w.t.s.w.s.OfflineJarUtils [OfflineJarUtils.kt:66] Exit initiated from tray icon

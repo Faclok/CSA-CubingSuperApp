@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Menu : MonoBehaviour {
 
@@ -14,12 +15,15 @@ public class Menu : MonoBehaviour {
 		["узоры"] = "https://zen.yandex.ru/video/watch/624a9bc20fb19733e9141c62",
 		["канал дзен"] = "https://zen.yandex.ru/id/624094a4f4d7ff38d09d7027"
 	};
-	public static bool canParticle = false;
-	public static int prevActiveToggle;
+
+	[SerializeField] private TextMeshProUGUI greetingText;
+
+	private List<string> greetingsTexts = new List<string>() { "Удачных сборок!", "Добро пожаловать!", "Хороших сборок!", "Новых рекордов!", "Интересных скрамблов!",
+	"Стабильного кручения!"};
 
     private void Awake()
     {
-		
+		greetingText.text = greetingsTexts[Random.Range(0,greetingsTexts.Count-1)];
 		if (PlayerPrefs.HasKey("ActiveToggle"))
         {
             cubeTypesScript.activeToggle = PlayerPrefs.GetInt("ActiveToggle");
@@ -50,35 +54,17 @@ public class Menu : MonoBehaviour {
 
 
     }
-    public void Play(){
-		//Destroy(gameObject);
-		SceneChanger.Cube.gameObject.SetActive(true);
-		SceneChanger.MoveToAnotherScene(SceneChanger.gameScene);
-	}
 
 	public void VideoZenMoe(string key)
     {
 		if (links.ContainsKey(key.ToLower()))
 			Application.OpenURL(links[key]);
 	}
-
-	public void StudyOnClick()
-    {
-		Destroy(gameObject);
-		SceneChanger.MoveToAnotherScene(SceneChanger.lessonsMenuScene);
-    }
-
-	public void InfoSceneMove()
-    {
-		SceneChanger.MoveToAnotherScene(SceneChanger.infoScene);
-	}
 	
 	public void SettingsSceneMove()
     {
 		if (CubeManager.canShuffle && CubeManager.canRotate)
 		{
-			SceneChanger.Cube.gameObject.SetActive(false);
-			SceneChanger.MoveToAnotherScene(SceneChanger.settingsScene);
 			if (cubeTypesScript.activeToggle == 0)
 			{
 				cubeTypesScript.standardType.isOn = true;
@@ -91,7 +77,6 @@ public class Menu : MonoBehaviour {
 			{
 				cubeTypesScript.tiledType.isOn = true;
 			}
-			prevActiveToggle = cubeTypesScript.activeToggle;
 
 			if (CubeManager.cubeSpeed == 5) { SliderSpeed.cubeSpeedSlider.value = 1; }
 			else if (CubeManager.cubeSpeed == 10) { SliderSpeed.cubeSpeedSlider.value = 2; }
@@ -102,58 +87,6 @@ public class Menu : MonoBehaviour {
 			SliderSpeed.cameraSpeedSlider.value = CameraMovement.cameraSpeed;
 		}
 	}
-
-	public void BackFromLesson()
-	{
-		for (int i = 0; i < Tab.TabPlace.transform.childCount; i++)
-		{
-			Destroy(Tab.TabPlace.transform.GetChild(i).gameObject);
-		}
-		Instantiate(Tab.Panels[0], Tab.TabPlace);
-	}
-
-	public void BackFromGame()
-	{
-		if (CubeManager.canShuffle && CubeManager.canRotate)
-		{
-			SceneChanger.MoveToAnotherScene(SceneChanger.menuScene);
-			SceneChanger.Cube.gameObject.SetActive(false);
-			Destroy(gameObject);
-		}
-	}
-
-	public void Back()
-	{
-		Destroy(gameObject);
-	}
-	
-	public void BackFromSettings()
-	{
-		if(prevActiveToggle != cubeTypesScript.activeToggle)
-        {
-			CubeManager.Type();
-			canParticle = false;
-        }
-		SceneChanger.Cube.gameObject.SetActive(true);
-		Destroy(gameObject);
-	}
-	
-	public void Shuffle()
-    {
-		CubeManager.Shuffle1();
-		canParticle = true;
-    }
-
-	public void ReCreate()
-    {
-		CubeManager.Type();
-		canParticle = false;
-    }
-
-	public void OnClickTips()
-    {
-		TipsMenuScript.SetButts();
-    }
 }
 
 	

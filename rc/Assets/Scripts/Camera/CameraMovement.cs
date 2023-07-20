@@ -2,15 +2,29 @@
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour {
-    Vector3 localRotation;
+    public static Vector3 localRotation;
+    public static Vector3 localPosition;
 	bool CameraDisabled = false,
 		 RotateDisabled = false;
-	public CubeManager CubeMan;
+	public static Camera CameraObj;
+	public Camera cameraObj;
+	private CubeManager CubeMan;
 	List<GameObject> pieces = new List<GameObject>(),
 					 planes = new List<GameObject>();
     public static int cameraSpeed;
+
+    private void Awake()
+    {
+		
+		CameraObj = cameraObj;
+		
+    }
     void LateUpdate () {
-		if (Input.GetMouseButton (0)) {
+		if (Tab.Cube.transform.childCount>0)
+		{
+			CubeMan = Tab.Cube.GetComponentInChildren<CubeManager>();
+		}
+        if (Input.GetMouseButton (0) && Tab.Cube.activeInHierarchy) {
 
 
 			if (!RotateDisabled) {
@@ -26,8 +40,15 @@ public class CameraMovement : MonoBehaviour {
 						pieces.Add (hit.collider.transform.parent.gameObject);
 						planes.Add (hit.collider.gameObject);
 					} else if (pieces.Count == 2) {
-						CubeMan.DetectRotate (pieces, planes);
-						RotateDisabled = true;
+						try
+						{
+							CubeMan.DetectRotate(pieces, planes);
+							RotateDisabled = true;
+						}
+						catch
+						{
+							Debug.Log("CamMove");
+						}
 					}
 						
 				}
@@ -36,25 +57,23 @@ public class CameraMovement : MonoBehaviour {
 			if (!CameraDisabled )
 			{
 				RotateDisabled = true;
-                if (Input.touchCount == 1)
+                if (Input.touchCount == 1 && Tab.Cube.gameObject.activeInHierarchy)
                 {
                     Input.GetTouch(0);
 
                     if (Input.GetTouch(0).phase == TouchPhase.Moved)
                     {
-                        if (Mathf.Round(localRotation.y/180)%2 != 0)
-                        {
-                            localRotation.x += Input.GetTouch(0).deltaPosition.x * -9 * cameraSpeed * Time.deltaTime; ;
-                        }
-                        else if (Mathf.Round(localRotation.y / 180) % 2 == 0)
-                        {
-                            localRotation.x += Input.GetTouch(0).deltaPosition.x * 9 * cameraSpeed * Time.deltaTime; ;
-                        }
-                        localRotation.y += Input.GetTouch(0).deltaPosition.y * -9 * cameraSpeed * Time.deltaTime;
-                       // localRotation.y = Mathf.Clamp(localRotation.y, -36000, 36000);
+						if (Mathf.Round(localRotation.y / 180) % 2 != 0)
+						{
+							localRotation.x += Input.GetTouch(0).deltaPosition.x * -cameraSpeed * Time.deltaTime; // Что за -9?
+						}
+						else if (Mathf.Round(localRotation.y / 180) % 2 == 0)
+						{
+							localRotation.x += Input.GetTouch(0).deltaPosition.x * cameraSpeed * Time.deltaTime;
+						}
+						localRotation.y += Input.GetTouch(0).deltaPosition.y * -cameraSpeed * Time.deltaTime;
 
-
-                    }
+					}
                 }
 
             }

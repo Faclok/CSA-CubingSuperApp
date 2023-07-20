@@ -22,12 +22,4 @@ public class LesMenu : MonoBehaviour
             installed.GetComponent<ChooseLesson>().lessonIndex += i;
         }
     }
-
-    public void BackFromLessonMenu()
-    {
-        SceneChanger.MoveToAnotherScene(SceneChanger.menuScene);
-        SceneChanger.Cube.gameObject.SetActive(false);
-        Destroy(gameObject);
-        
-    }
 }
