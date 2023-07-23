@@ -1,21 +1,28 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - Analyze
     - CameraMovement
     - ChooseLesson
+    - CubeAlg
+    - CubeAlgButtons
+    - CubeAlgManager
     - CubeCreator
     - CubeManager
     - CubePieceScript
     - Game
     - GameButtons
     - LesMenu
+    - Main
     - Menu
     - SafeAreaFitter
     - ShowAlg
     - SliderSpeed
     - Tab
     - TabButton
+    - Timer
     - TipsMenuScript
+    - Zoom
     - cubeTypesScript
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
@@ -119,6 +126,12 @@ ScriptsOnlyBuild:
     fullTypeName: GameButtons
     methodName: OpenTips
   - assembly: Assembly-CSharp
+    fullTypeName: Zoom
+    methodName: ZoomIn
+  - assembly: Assembly-CSharp
+    fullTypeName: Zoom
+    methodName: ZoomOut
+  - assembly: Assembly-CSharp
     fullTypeName: ShowAlg
     methodName: ShowAlgoritm
   - assembly: Assembly-CSharp
@@ -137,8 +150,8 @@ ScriptsOnlyBuild:
     fullTypeName: SliderSpeed
     methodName: OnValueChangedCameraSpeed
   - assembly: Assembly-CSharp
-    fullTypeName: Menu
-    methodName: VideoZenMoe
+    fullTypeName: cubeTypesScript
+    methodName: Close
   - assembly: Assembly-CSharp
     fullTypeName: Menu
     methodName: VideoZenMoe
@@ -163,6 +176,15 @@ ScriptsOnlyBuild:
   - assembly: Assembly-CSharp
     fullTypeName: Menu
     methodName: VideoZenMoe
+  - assembly: Assembly-CSharp
+    fullTypeName: CubeAlgButtons
+    methodName: NextMove
+  - assembly: Assembly-CSharp
+    fullTypeName: CubeAlgButtons
+    methodName: NextMove
+  - assembly: Assembly-CSharp
+    fullTypeName: CubeAlgButtons
+    methodName: PrevMove
   - assembly: Assembly-CSharp
     fullTypeName: TabButton
     methodName: OnClick
@@ -179,7 +201,7 @@ ScriptsOnlyBuild:
     fullTypeName: TabButton
     methodName: OnClick
   sceneClasses:
-    Assets/Scenes/MainScene/game.unity:
+    Assets/Scenes/Menu/game.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -203,8 +225,6 @@ ScriptsOnlyBuild:
     - Class: 64
       Script: {instanceID: 0}
     - Class: 65
-      Script: {instanceID: 0}
-    - Class: 81
       Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
@@ -233,7 +253,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2450}
     - Class: 114
-      Script: {instanceID: 2866}
+      Script: {instanceID: 2864}
+    - Class: 114
+      Script: {instanceID: 3010}
     - Class: 114
       Script: {instanceID: 3106}
     - Class: 114
@@ -265,31 +287,43 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5612}
     - Class: 114
-      Script: {instanceID: 5752}
+      Script: {instanceID: 5630}
     - Class: 114
-      Script: {instanceID: 5764}
+      Script: {instanceID: 5754}
     - Class: 114
-      Script: {instanceID: 5848}
+      Script: {instanceID: 5766}
+    - Class: 114
+      Script: {instanceID: 5850}
     - Class: 114
       Script: {instanceID: 5944}
     - Class: 114
       Script: {instanceID: 5958}
     - Class: 114
-      Script: {instanceID: 6190}
+      Script: {instanceID: 6010}
     - Class: 114
-      Script: {instanceID: 6536}
+      Script: {instanceID: 6102}
     - Class: 114
-      Script: {instanceID: 6580}
+      Script: {instanceID: 6194}
     - Class: 114
-      Script: {instanceID: 6766}
+      Script: {instanceID: 6366}
     - Class: 114
-      Script: {instanceID: 7120}
+      Script: {instanceID: 6542}
     - Class: 114
-      Script: {instanceID: 7172}
+      Script: {instanceID: 6586}
     - Class: 114
-      Script: {instanceID: 7632}
+      Script: {instanceID: 6772}
     - Class: 114
-      Script: {instanceID: 7840}
+      Script: {instanceID: 6974}
+    - Class: 114
+      Script: {instanceID: 7128}
+    - Class: 114
+      Script: {instanceID: 7180}
+    - Class: 114
+      Script: {instanceID: 7488}
+    - Class: 114
+      Script: {instanceID: 7642}
+    - Class: 114
+      Script: {instanceID: 7850}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -493,12 +527,6 @@ ScriptsOnlyBuild:
     className: RawImage
   - hash:
       serializedVersion: 2
-      Hash: 30c77810c3f412553015443e0a1a37ec
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Settings
-  - hash:
-      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
@@ -551,6 +579,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: TMPro.Examples
     className: TMP_TextSelector_A
+  - hash:
+      serializedVersion: 2
+      Hash: c93393a01fe3cb2fc0241b6356016999
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CubeAlg
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -979,7 +1013,7 @@ ScriptsOnlyBuild:
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 3096496f5cf4c6f6fabd2ecadf9fe2be
+      Hash: 9e5f288efb49762ef4e50907d15dd587
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CameraMovement
@@ -989,6 +1023,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_InputField
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CubeAlgButtons
   - hash:
       serializedVersion: 2
       Hash: 52bcb9c2a78bdd8d98a59e915c346e75
@@ -1039,19 +1079,13 @@ ScriptsOnlyBuild:
     className: TMP_FontAsset
   - hash:
       serializedVersion: 2
-      Hash: ac50ffff8359b41250152820e63eff7a
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: AnimController
-  - hash:
-      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SafeAreaFitter
   - hash:
       serializedVersion: 2
-      Hash: 7942ef2956e51f6fcf398c3db068c429
+      Hash: 32ffe3d49a714fcc4af7a4e23153d626
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CubeManager
@@ -1064,6 +1098,12 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Zoom
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnBecameInvisibleMessageListener
@@ -1073,6 +1113,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UIElements
     className: PanelEventHandler
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Timer
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -1097,6 +1143,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.Purchasing.Stores.dll
     namespaceName: UnityEngine.Purchasing
     className: LifecycleNotifier
+  - hash:
+      serializedVersion: 2
+      Hash: d8ca94cbaccf614d70cab9c0e2a34d2c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CubeAlgManager
   - hash:
       serializedVersion: 2
       Hash: 2574ac7d50617d23cdefe4ad22f5e1ad
@@ -1160,6 +1212,12 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Main
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnMouseUpAsButtonMessageListener
@@ -1171,7 +1229,7 @@ ScriptsOnlyBuild:
     className: Benchmark03
   - hash:
       serializedVersion: 2
-      Hash: da4c32122446fe87997abcbafa0beb33
+      Hash: 303ba663326ef6402493846104907e72
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CubeCreator
@@ -1211,6 +1269,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextContainer
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Analyze
   - hash:
       serializedVersion: 2
       Hash: bd3f0ca738703903e759f77536ed74fd
@@ -1279,7 +1343,7 @@ ScriptsOnlyBuild:
     className: VertexJitter
   - hash:
       serializedVersion: 2
-      Hash: c5ff04ca5a9dd5f581adf3171aaffc8c
+      Hash: 11386807fad2861b434cf3192a8f5b56
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: cubeTypesScript
@@ -1507,5 +1571,5 @@ ScriptsOnlyBuild:
     className: UnityOnSliderValueChangedMessageListener
   platform: 13
   scenePathNames:
-  - Assets/Scenes/MainScene/game.unity
+  - Assets/Scenes/Menu/game.unity
   playerPath: C:/Users/user/Desktop/RubikSimulator.apk
