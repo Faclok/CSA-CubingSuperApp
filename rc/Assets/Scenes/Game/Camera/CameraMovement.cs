@@ -1,86 +1,78 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraMovement : MonoBehaviour {
+public class CameraMovement : MonoBehaviour
+{
     public static Vector3 localRotation;
-	bool CameraDisabled = false,
-		 RotateDisabled = false;
-	public static Camera CameraObj;
-	public Camera cameraObj;
-	private CubeManager CubeMan;
-	public static List<GameObject> pieces = new List<GameObject>(),
-					 planes = new List<GameObject>();
-    public static int cameraSpeed;
+    bool CameraDisabled = false,
+         RotateDisabled = false;
+    public static Camera CameraObj;
+    public Camera cameraObj;
+    private CubeManager CubeMan;
+    public static List<GameObject> pieces = new List<GameObject>(),
+                     planes = new List<GameObject>();
+    public static int cameraSpeed = 90;
+    public static float cameraSpeedS = 45f;
 
-    private void Awake()
+    public CubicRubik CubicRubik;
+
+    public float rotationSpeed = 5f;
+
+    private Vector2 previousTouchPosition;
+    private Vector2 currentTouchPosition;
+
+    void Update()
     {
-		CameraObj = cameraObj;
-		//localRotation.x = -45;
-		//localRotation.y = 25;
+        // Проверяем, было ли касание экрана (или щелчок мыши)
+        if (Input.touchCount > 0)
+        {
+            // Создаем луч, который исходит из позиции камеры и направлен в точку, на которую произошло нажатие
+            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
 
-    }
-    void LateUpdate () {
+            // Проверяем, пересек ли луч какой-либо коллайдер объектов в сцене
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
 
-		if (Tab.Cube.transform.childCount>0)
-		{
-			CubeMan = Tab.Cube.GetComponentInChildren<CubeManager>();
-		}
-
-        if (Input.GetMouseButton (0) && Tab.Cube.activeInHierarchy) {
-			if (!RotateDisabled) {
-				Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-				RaycastHit hit;
-
-				if (Physics.Raycast (ray, out hit, 100)) {
-					
-					CameraDisabled = true;
-
-					if (pieces.Count < 2 && !pieces.Exists(x => x == hit.collider.transform.parent.gameObject) && hit.transform.parent.gameObject != CubeMan.gameObject) 
-					{
-						pieces.Add (hit.collider.transform.parent.gameObject);
-						planes.Add (hit.collider.gameObject);
-					} 
-					else if (pieces.Count == 2) {
-						CubeMan.DetectRotate(pieces, planes);
-						RotateDisabled = true;
-					}
-						
-				}
-		
-			}
-			if (!CameraDisabled )
-			{
-				RotateDisabled = true;
-                if (Input.touchCount == 1 && Tab.Cube.gameObject.activeInHierarchy)
+                // Проверяем, если коллайдер принадлежит какому-либо GameObject, выполняем нужные действия
+                if (hit.collider.gameObject != null && hit.collider.gameObject.TryGetComponent(out ClickObject click))
                 {
-                    Input.GetTouch(0);
-
-                    if (Input.GetTouch(0).phase == TouchPhase.Moved)
-                    {
-						if (Mathf.Round(localRotation.y / 180) % 2 != 0)
-						{
-							localRotation.x += Input.GetTouch(0).deltaPosition.x * -cameraSpeed * Time.deltaTime;
-						}
-						else if (Mathf.Round(localRotation.y / 180) % 2 == 0)
-						{
-							localRotation.x += Input.GetTouch(0).deltaPosition.x * cameraSpeed * Time.deltaTime;
-						}
-						localRotation.y += Input.GetTouch(0).deltaPosition.y * -cameraSpeed * Time.deltaTime;
-					}
+                    click.Face.Rotation();
                 }
-
             }
+        }
+        // Проверяем наличие касаний
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
 
-        } 
-		else if (Input.GetMouseButtonUp (0)) 
-		{
-			pieces.Clear();
-			planes.Clear();
-			CameraDisabled = RotateDisabled = false;
-		
-		}
-		Quaternion qt = Quaternion.Euler (localRotation.y, localRotation.x, 0);
-		transform.parent.rotation = Quaternion.Lerp (transform.parent.rotation, qt, Time.deltaTime * 15);
-	}
+            // Обрабатываем касание
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    previousTouchPosition = touch.position;
+                    break;
+
+                case TouchPhase.Moved:
+                    currentTouchPosition = touch.position;
+
+                    // Вычисляем разницу между текущим и предыдущим положением касания
+                    Vector2 touchDelta = currentTouchPosition - previousTouchPosition;
+
+                    // Вычисляем угол поворота по оси X и Y
+                    float rotationX = touchDelta.y * rotationSpeed * Time.deltaTime;
+                    float rotationY = -touchDelta.x * rotationSpeed * Time.deltaTime;
+
+                    // Применяем поворот к кубику относительно мировых координат
+                    CubicRubik.transform.Rotate(rotationX, rotationY, 0f, Space.World);
+
+                    // Сохраняем текущее положение касания в качестве предыдущего на следующем шаге
+                    previousTouchPosition = currentTouchPosition;
+                    break;
+
+                case TouchPhase.Ended:
+                    break;
+            }
+        }
+    }
 
 }
